@@ -1,0 +1,12 @@
+eclipse.preferences.version=1
+environment/project/0.196906597/PATH/delimiter=;
+environment/project/0.196906597/PATH/operation=replace
+environment/project/0.196906597/PATH/value=${TOOLS_HOME}\\arm-none-eabi-gcc\\13.2.1-1.1.1\\.content\\bin;${TOOLS_HOME}\\windows-build-tools\\4.2.1-2.1\\.content\\bin;${USERPROFILE}/.p2/pool/plugins/org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_17.0.9.v20231028-0858/jre/bin/server;${USERPROFILE}/.p2/pool/plugins/org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_17.0.9.v20231028-0858/jre/bin;C\:\\WINDOWS\\system32;C\:\\WINDOWS;C\:\\WINDOWS\\System32\\Wbem;C\:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C\:\\WINDOWS\\System32\\OpenSSH\\;C\:\\Program Files\\TortoiseSVN\\bin;C\:\\Program Files\\CMake\\bin;C\:\\Program Files\\nodejs\\;C\:\\Program Files\\Git\\cmd;C\:\\Program Files\\TortoiseGit\\bin;${LOCALAPPDATA}\\Microsoft\\WindowsApps;${APPDATA}\\npm;${LOCALAPPDATA}\\Programs\\MiKTeX\\miktex\\bin\\x64\\;C\:\\Program Files\\stlink\\stlink-1.7.0-i686-w64-mingw32\\bin;C\:\\Program Files\\STMicroelectronics\\STM32Cube\\STM32CubeProgrammer\\bin;${USERPROFILE}\\Desktop;${LOCALAPPDATA}\\Arduino15\\packages\\STMicroelectronics\\tools\\STM32Tools\\2.2.1\\win\\
+environment/project/0.196906597/TOOLS_HOME/delimiter=;
+environment/project/0.196906597/TOOLS_HOME/operation=append
+environment/project/0.196906597/TOOLS_HOME/value=${APPDATA}\\\\xPacks\\\\@xpack-dev-tools
+environment/project/0.196906597/XDG_CACHE_HOME/delimiter=;
+environment/project/0.196906597/XDG_CACHE_HOME/operation=append
+environment/project/0.196906597/XDG_CACHE_HOME/value=${APPDATA}/xPacks/.cache
+environment/project/0.196906597/append=true
+environment/project/0.196906597/appendContributed=true

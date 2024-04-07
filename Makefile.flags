@@ -1,0 +1,54 @@
+##
+##    Copyright (c) 2024 mphhpm.
+##    Permission is hereby granted, free of charge, to any person obtaining
+##    a copy of this software and associated documentation files (the "Software"),
+##    to deal in the Software without restriction, including without limitation
+##    the rights to use, copy, modify, merge, publish, distribute, sublicense,
+##    and/or sell copies of the Software, and to permit persons to whom the Software
+##    is furnished to do so, subject to the following conditions:
+##
+##    The above copyright notice and this permission notice shall be included in
+##    all copies or substantial portions of the Software.
+##
+##    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+##    EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+##    OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+##    IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+##    CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+##    TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
+##    OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+##
+##    Changes
+##    2-Feb-2024: mphhpm: initial version
+##
+## contains the arduino/stm32 specific compiler flags
+
+## C/C++ standards
+CXXSTD    = -std=gnu++17
+CSTD      = -std=c99
+##
+## generated debug info
+DEBUG     = -ggdb3
+##
+## optimize
+OPTIMIZE  = -O0
+##
+## architecure
+ARCH        = -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16
+ARFLAGS     = rcv
+##
+## warnings, cues
+WARNINGS    = -fno-common -ffunction-sections -fdata-sections -Wextra -Wshadow -Wno-unused-variable -Wredundant-decls
+WARNINGS   += --param max-inline-insns-single=500
+
+LDLIBS      = -Wl,--start-group -lc -lgcc -lnosys -Wl,--end-group
+
+ASFLAGS     = -x assembler-with-cpp
+ASFLAGS    += $(ARCH)
+
+CPPFLAGS    = -MD -Wall -Wundef -Weffc++
+CPPFLAGS   += $(OPTIMIZE) $(ARCH) $(WARNINGS) $(CXXSTD) $(DEBUG)
+CPPFLAGS   += -fno-threadsafe-statics -fno-rtti -fno-exceptions -fno-use-cxa-atexit  
+
+CFLAGS    = -Wimplicit-function-declaration -Wstrict-prototypes -Wmissing-prototypes
+CFLAGS   += $(OPTIMIZE) $(CSTD) $(DEBUG) $(ARCH) $(WARNINGS) $(INCLUDES)

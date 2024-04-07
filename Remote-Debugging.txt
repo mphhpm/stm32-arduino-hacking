@@ -1,0 +1,18 @@
+ see https://erika.tuxfamily.org/wiki/index.php?title=Tutorial:_STM32_-_Integrated_Debugging_in_Eclipse_using_GNU_toolchain&oldid=5474
+ 
+ 1. use debugger from gnu-arm-eclipse package
+ 2.1 create debug configuration at Run -> Debug Configurations -> GDB Hardware Debugging
+ 2.2 choose .elf file as C++ application
+ 2.3 choose project that contains the application
+ 3.1 GDB command: arm-none-eabi-gdb
+ 3.2 JTAG device: Generic TCP/IP
+ 3.3 Hostname: localhost
+ 3.4 Port number : 1234
+ 4.1 Launch ST-UTIL from Eclipse, create a External Tool Configuration at Run -> External Tools Configuration
+ 4.2 Command: st-util
+ 4.3 Arguments: --listen_port=1234
+ 4.3 Build Specific projects: select project of .elf file
+ 5.1 Run st-util at  Run->External Tools->st-util
+     or run it in a cmd shell "C:\Program Files\stlink\stlink-1.7.0-i686-w64-mingw32\bin\st-util.exe" --listen_port=1234
+ 6.1 Start debugging session
+ 

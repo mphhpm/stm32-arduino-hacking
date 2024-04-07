@@ -1,0 +1,52 @@
+##
+##    Copyright (c) 2024 mphhpm.
+##    Permission is hereby granted, free of charge, to any person obtaining
+##    a copy of this software and associated documentation files (the "Software"),
+##    to deal in the Software without restriction, including without limitation
+##    the rights to use, copy, modify, merge, publish, distribute, sublicense,
+##    and/or sell copies of the Software, and to permit persons to whom the Software
+##    is furnished to do so, subject to the following conditions:
+##
+##    The above copyright notice and this permission notice shall be included in
+##    all copies or substantial portions of the Software.
+##
+##    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+##    EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+##    OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+##    IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+##    CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+##    TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
+##    OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+##
+##    Changes
+##    2-Feb-2024: mphhpm: initial version
+##
+
+PROJECT_ARDUINO_LIB = stm32-arduino-lib
+OUTPUT_ARDUINO_LIBROOTDIR = $(BUILD_ROOTDIR)/$(PROJECT_ARDUINO_LIB)/$(VARIANT)
+OUTPUT_ARDUINO_LIBDIR = $(OUTPUT_ARDUINO_LIBROOTDIR)/lib
+
+ARDUINO_LIBDIR=$(PROJECT_ROOTDIR)/lib/arduino-lib
+ADAFRUIT_INCLUDES  = $(shell $(FIND) $(ARDUINO_LIBDIR)/Adafruit_BusIO -type f -name "*.h" -follow)
+ADAFRUIT_INCLUDES += $(shell $(FIND) $(ARDUINO_LIBDIR)/Adafruit_GFX_Library -type f -name "*.h" -follow)
+ADAFRUIT_INCLUDES += $(shell $(FIND) $(ARDUINO_LIBDIR)/Adafruit_SSD1306 -type f -name "*.h" -follow)
+ADAFRUIT_INCLUDES_SEARCHDIR = $(patsubst %,-I%, $(sort . $(dir $(ADAFRUIT_INCLUDES))))
+
+STM32_ARDUINO_LIBDIR=$(PROJECT_ROOTDIR)/lib/stm-arduino-lib
+SRC_WRAPPER_INCLUDES  = $(shell $(FIND) $(STM32_ARDUINO_LIBDIR)/libraries/SrcWrapper -type f -name "*.h" -follow)
+SRC_WRAPPER_INCLUDES += $(shell $(FIND) $(STM32_ARDUINO_LIBDIR)/libraries/SPI -type f -name "*.h" -follow)
+SRC_WRAPPER_INCLUDES += $(shell $(FIND) $(STM32_ARDUINO_LIBDIR)/libraries/Wire -type f -name "*.h" -follow)
+SRC_WRAPPER_INCLUDES += $(shell $(FIND) $(STM32_ARDUINO_LIBDIR)/cores -type f -name "*.h" -follow)
+SRC_WRAPPER_INCLUDES_SEARCHDIR = $(patsubst %,-I%, $(sort . $(dir $(SRC_WRAPPER_INCLUDES))))
+
+STM32_TOOLS_LIBDIR=$(PROJECT_ROOTDIR)/lib/stm-tools
+STM32_TOOLS_INCLUDES  = $(shell $(FIND) $(STM32_TOOLS_LIBDIR)/CMSIS/*/CMSIS/Core -type f -name "*.h" -follow)
+STM32_TOOLS_INCLUDES_SEARCHDIR = $(patsubst %,-I%, $(sort . $(dir $(STM32_TOOLS_INCLUDES))))
+
+ARDUINO_INCLUDES_SEARCHDIR  = $(ADAFRUIT_INCLUDES_SEARCHDIR) $(SRC_WRAPPER_INCLUDES_SEARCHDIR) $(STM32_TOOLS_INCLUDES_SEARCHDIR)
+ARDUINO_INCLUDES_SEARCHDIR += -I$(STM32_ARDUINO_LIBDIR)/system/Drivers/CMSIS/Device/ST/$(VARIANT)/Include
+ARDUINO_INCLUDES_SEARCHDIR += -I$(STM32_ARDUINO_LIBDIR)/system/Drivers/$(VARIANT)_HAL_Driver/Inc
+ARDUINO_INCLUDES_SEARCHDIR += -I$(STM32_ARDUINO_LIBDIR)/system/$(VARIANT)
+ARDUINO_INCLUDES_SEARCHDIR += -I$(STM32_ARDUINO_LIBDIR)/variants/$(VARIANT)/"F411C(C-E)(U-Y)"
+
+#$(info $$(ARDUINO_INCLUDES_SEARCHDIR): $(ARDUINO_INCLUDES_SEARCHDIR))
