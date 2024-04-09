@@ -47,16 +47,16 @@ CFILES    = $(sort $(wildcard $(shell $(FIND) ../../lib/arduino-lib/Adafruit_Bus
 CFILES   += $(sort $(wildcard $(shell $(FIND) ../../lib/arduino-lib/Adafruit_GFX_Library -type f -name "*.c" | $(GREP) -vw examples)))
 CFILES   += $(sort $(wildcard $(shell $(FIND) ../../lib/arduino-lib/Adafruit_SSD1306 -type f -name "*.c" | $(GREP) -vw examples)))
 ##
-## files to be considered to compile
-CPPFILES += ssd1306_128x32_i2c.cpp  SrcWrapper.cpp
-
+## project files to compile
+INOFILES += ssd1306_128x32_i2c.ino
+CPPFILES += SrcWrapper.cpp
 #$(info $$(CPPFILES) $(CPPFILES))
 
 LDLIBS     += -lstm32-arduino-lib.$(VARIANT)
 ##
 ## mcu specific script
 LDSCRIPT    = $(PROJECT_ROOTDIR)/lib/stm-arduino-lib/variants/$(VARIANT)/"F411C(C-E)(U-Y)"/ldscript.ld
-LDFLAGS     = -T$(LDSCRIPT) #-nostartfiles
+LDFLAGS     = -T$(LDSCRIPT)
 LDFLAGS    += $(ARCH)
 LDFLAGS    += -mthumb "@./build.opt"
 LDFLAGS    += -Wl,--nostdlib
@@ -66,12 +66,12 @@ LDFLAGS    += -Wl,--defsym=LD_FLASH_OFFSET=0x0 -Wl,--defsym=LD_MAX_SIZE=524288 -
 LDFLAGS    += -Wl,--entry=Reset_Handler -Wl,--unresolved-symbols=report-all -Wl,--warn-common
 ##
 ## dependencies
-DEPFILES  = $(addprefix $(DEPDIR)/, $(notdir $(CFILES:%.c=$(DEPDIR)/%.d)), $(notdir $(CPPFILES:%.cpp=$(DEPDIR)/%.d)))
+DEPFILES  = $(addprefix $(DEPDIR)/, $(notdir $(CFILES:%.c=$(DEPDIR)/%.d) $(CPPFILES:%.cpp=$(DEPDIR)/%.d) $(INOFILES:%.ino=$(DEPDIR)/%.d)))
 DEPFLAGS  = -MT $@ -MMD -MP -MF $(DEPDIR)/$(notdir $*).d
 ##
 ## search path
-VPATH     =  $(sort $(dir $(CFILES) $(CPPFILES)))
-INCLUDES  = $(patsubst %,-I%, $(sort .  $(dir $(CPPFILES) $(CFILES)) $(dir $ $(shell $(FIND) . -type f -name '*.h*'))))
+VPATH     = $(sort $(dir $(CFILES) $(CPPFILES) $(INOFILES)))
+INCLUDES  = $(patsubst %,-I%, $(sort .  $(dir $(CPPFILES) $(CFILES) $(INOFILES) $(shell $(FIND) . -type f -name '*.h*'))))
 INCLUDES += $(ARDUINO_INCLUDES_SEARCHDIR)
 ##
 ## compiler flags
@@ -80,8 +80,8 @@ CPPFLAGS += $(INCLUDES) $(DEFINES) -DSSD1306_NO_SPLASH
 CFLAGS   += $(INCLUDES) $(DEFINES) -DSSD1306_NO_SPLASH
 ##
 ## determine object files to be generated
-OBJS  = $(addprefix $(BUILD_DIR)/, $(sort $(notdir $(CFILES:%.c=$(BUILD_DIR)/%.o))))
-OBJS += $(addprefix $(BUILD_DIR)/, $(sort $(notdir $(CPPFILES:%.cpp=$(BUILD_DIR)/%.o))))
+OBJS  = $(addprefix $(BUILD_DIR)/, $(sort $(notdir $(CFILES:%.c=$(BUILD_DIR)/%.o) $(CPPFILES:%.cpp=$(BUILD_DIR)/%.o) $(INOFILES:%.ino=$(BUILD_DIR)/%.o))))
+#$(info $$(OBJS) $(OBJS))
 
 include ../../Makefile.rules
 

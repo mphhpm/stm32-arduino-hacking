@@ -1,4 +1,5 @@
 :: Run this as adminstrator
+:: Adjust the locations to be linked to, according to your environment
 @echo creating links
 
 @mklink /D arduino-lib %HOMEDRIVE%%HOMEPATH%\Documents\Arduino

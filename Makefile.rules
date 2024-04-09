@@ -20,11 +20,16 @@
 ##
 ##    Changes
 ##    2-Feb-2024: mphhpm: initial version
-	
+
 $(BUILD_DIR)/%.o: %.cpp
 	$(Q)printf "  [C++]\t$(notdir $<)\n"
 	$(Q)mkdir -p $(dir $@)
 	$(Q)$(CXX) $(CPPFLAGS) -o "$@" -c "$<"
+
+$(BUILD_DIR)/%.o: %.ino
+	$(Q)printf "  [C++]\t$(notdir $<)\n"
+	$(Q)mkdir -p $(dir $@)
+	$(Q)$(CXX) $(CPPFLAGS) -x c++ -o "$@" -c "$<"
 	
 $(BUILD_DIR)/%.o: %.c
 	$(Q)printf "  [CC]\t$(notdir $<)\n"

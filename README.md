@@ -12,10 +12,11 @@ STM32F411xC STM32F411xE Arm® Cortex®-M4 32b MCU+FPU, 125 DMIPS, 512KB Flash, 1
 ## Tools ##
 ```
 os : windows
-make, gcc & friends : https://xpack.github.io/dev-tools/arm-none-eabi-gcc
-ide : https://www.eclipse.org
-arduino : www.arduino.cc
-st-link : https://www.st.com/en/development-tools/st-link-v2.html, alixepress
+to be installed :
+    make, gcc & friends : https://xpack.github.io/dev-tools/arm-none-eabi-gcc
+    ide : https://www.eclipse.org
+    arduino : www.arduino.cc
+    st-link : https://www.st.com/en/development-tools/st-link-v2.html, alixepress
 ```
 
 ## Folders ###
