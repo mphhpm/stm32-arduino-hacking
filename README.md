@@ -1,6 +1,6 @@
 # stm32-arduino-hacking
 ```
-ssd1306 display on a blackpill board stm32f411 
+ssd1306 display with a blackpill board stm32f411 
 
 ```
 ## Helpful documents
@@ -40,4 +40,10 @@ Project
                  +--lib      arduino library the projects to be linked to
 ```
 
+# Eclipse #
+```
+Import the project into eclipse as 'Makefile project with existing code' and re-insert the build targets manually as they get removed during the import
+Change the C/C++ build environment variables according to your setup
+```
 Happy hacking
+```
