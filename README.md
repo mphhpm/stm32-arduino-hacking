@@ -54,7 +54,7 @@ Build the library before any project
 # Command line  #
 ```
 run env.bat, make sure the xtools are installed and the path is set accordingly
-make TARGET_PROJECTDIR=lib && make TARGET_PROJECTDIR=src/ssd1306_128x32s
+make TARGETPROJECT_DIR=lib && make TARGETPROJECT_DIR=src/ssd1306_128x32s
 ```
 
 Happy hacking
