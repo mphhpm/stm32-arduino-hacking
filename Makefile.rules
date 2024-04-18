@@ -51,6 +51,11 @@ $(BUILD_DIR)/%.o: %.S
 	$(Q)mkdir -p $(dir $@)
 	$(Q)$(OBJDUMP) -S $< > $@
 	$(Q)$(OBJDUMP) -h $<
+
+%.list: %.a
+	$(Q)printf "  [OBJDUMP]\t$(notdir $@)\n"
+	$(Q)mkdir -p $(dir $@)
+	$(Q)$(OBJDUMP) -x -S $< > $@
 	
 flash:
 	$(Q)printf "  [FLASH]\t$(OUTPUT_DIR)/$(PROJECT).bin\n"

@@ -84,7 +84,8 @@ CFLAGS     += $(ADDFLAGS)
  
 include ../Makefile.rules
 
-all: $(OUTPUT_ARDUINO_LIBDIR)/$(LIBNAME).a
+
+all: $(OUTPUT_ARDUINO_LIBDIR)/$(LIBNAME).a $(OUTPUT_ARDUINO_LIBDIR)/$(LIBNAME).list
 
 $(OUTPUT_ARDUINO_LIBDIR)/$(LIBNAME).a: $(DEPDIR) $(LIBOBJS)
 	$(Q)printf "  [AR]    $(LIBNAME).a\n"

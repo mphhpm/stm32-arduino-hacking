@@ -27,10 +27,8 @@ Q=@
 ## toolchain
 include ../../Makefile.toolchain
 include ../../Makefile.flags
-include ../../Makefile.rules
 include ../../Makefile.STM32F4xx
 include ../../Makefile.Arduino
-
 
 PROJECT        = ssd1306_128x32s
 OUTPUT_ROOTDIR = $(BUILD_ROOTDIR)/$(PROJECT)
@@ -52,7 +50,7 @@ INOFILES += ssd1306_128x32_i2c.ino
 CPPFILES += SrcWrapper.cpp
 #$(info $$(CPPFILES) $(CPPFILES))
 
-LDLIBS     += -lstm32-arduino-lib.$(VARIANT)
+LDLIBS     += -lstm32-arduino-lib.$(VARIANT) -lnosys
 ##
 ## mcu specific script
 LDSCRIPT    = $(PROJECT_ROOTDIR)/lib/stm-arduino-lib/variants/$(VARIANT)/"F411C(C-E)(U-Y)"/ldscript.ld
@@ -64,6 +62,7 @@ LDFLAGS    += -specs=nano.specs -specs=nosys.specs
 LDFLAGS    += -Wl,--gc-sections -Wl,-Map,$(OUTPUT_DIR)/$(PROJECT).map -L $(OUTPUT_ARDUINO_LIBDIR)
 LDFLAGS    += -Wl,--defsym=LD_FLASH_OFFSET=0x0 -Wl,--defsym=LD_MAX_SIZE=524288 -Wl,--defsym=LD_MAX_DATA_SIZE=131072 
 LDFLAGS    += -Wl,--entry=Reset_Handler -Wl,--unresolved-symbols=report-all -Wl,--warn-common
+
 ##
 ## dependencies
 DEPFILES  = $(addprefix $(DEPDIR)/, $(notdir $(CFILES:%.c=$(DEPDIR)/%.d) $(CPPFILES:%.cpp=$(DEPDIR)/%.d) $(INOFILES:%.ino=$(DEPDIR)/%.d)))

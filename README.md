@@ -39,12 +39,23 @@ Project
        +--stm32-arduino-lib
             +--variant       [e.g. stm32f4xx]
                  +--lib      arduino library the projects to be linked to
+
+check lib/createlinks.bat and set the paths accordingly
+run lib/createlinks.bat as administrator
 ```
 
 # Eclipse #
 ```
 Import the project into eclipse as 'Makefile project with existing code' and re-insert the build targets manually as they get removed during the import
 Change the C/C++ build environment variables according to your setup
+Build the library before any project
 ```
+
+# Command line  #
+```
+run env.bat, make sure the xtools are installed and the path is set accordingly
+make TARGET_PROJECTDIR=lib && make TARGET_PROJECTDIR=src/ssd1306_128x32s
+```
+
 Happy hacking
 ```
